@@ -14,6 +14,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddOpenTelemetryTracing((builder) => builder
+    .AddZipkinExporter(o => o.HttpClientFactory = () =>
+    {
+        HttpClient client = new HttpClient();
+        client.DefaultRequestHeaders.Add("X-MyCustomHeader", "value");
+        return client;
+    }));
+
 builder.Services.AddOpenTelemetryTracing(b =>
 {
     // uses the default Jaeger settings
