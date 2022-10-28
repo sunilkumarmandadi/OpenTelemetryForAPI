@@ -13,10 +13,13 @@ namespace OpenTelemetryForAPI
 
         public static readonly ActivitySource DemoTracer = new ActivitySource(MyAppSource);
 
-        public static readonly Meter DemoMeter = new Meter(MyAppSource);
+        public static readonly Meter OTmeter = new Meter(MyAppSource);
 
         public static readonly Counter<long> HitsCounter =
-            DemoMeter.CreateCounter<long>("IndexHits", "hits", "number of hits to API");
+            OTmeter.CreateCounter<long>("IndexHits", "hits", "number of hits to API");
+        
+
+
 
     }
 }
